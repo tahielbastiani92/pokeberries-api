@@ -1,7 +1,7 @@
 from fastapi import FastAPI, Response
 from src.services.pokeapi import get_all_berries_data
+from src.schemas.berries_stats import BerryStatsResponse
 from src.utils.statistics import calculate_statistics
-from typing import List, Dict
 
 app = FastAPI(title="Pokeberries API")
 
@@ -10,7 +10,8 @@ app = FastAPI(title="Pokeberries API")
 def intial():
     return {"message": "Working.. Pokeberries statistics is coming.."}
 
-@app.get("/allBerryStats", response_model=dict)
+
+@app.get("/allBerryStats", response_model=BerryStatsResponse)
 def all_berry_statstics(response: Response):
     """
     Returns berries' statistics
