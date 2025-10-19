@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 
 
-app = FastAPI(title="Pokerberries API")
+app = FastAPI(title="Pokeberries API")
 
 
 @app.get("/")
