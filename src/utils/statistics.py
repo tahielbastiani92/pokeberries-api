@@ -22,5 +22,5 @@ def calculate_statistics(berries_data):
             "frequency_growth_time": dict(freq)
         }
     except Exception as e:
-        print(f"An unexpected error: {e}")
+        print(f"Error: {e}")
         return {"error": "Unexpected error occurred while calculating statistics."}
