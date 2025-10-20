@@ -1,0 +1,11 @@
+version: '3.10'
+services:
+  pokeberries:
+    build: .
+    container_name: pokeberries
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./src:/app/src
+    env_file: .env
+    command: uvicorn src.main:app --host 0.0.0.0 --port 8000 --reload
