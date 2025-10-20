@@ -2,10 +2,24 @@ version: '3.10'
 services:
   pokeberries:
     build: .
-    container_name: pokeberries
+    container_name: api-pokeberries
     ports:
       - "8000:8000"
     volumes:
       - ./src:/app/src
     env_file: .env.local
+    depends_on:
+      - redis
     command: uvicorn src.main:app --host 0.0.0.0 --port 8000 --reload
+  
+  redis:
+    image: redis:7-alpine
+    container_name: redis-pokeberries
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    restart: always
+
+volumes:
+  redis_data:

@@ -39,3 +39,8 @@ jobs:
       - run: flyctl deploy --remote-only
         env:
           FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
+          REDIS_PASSWORD: ${{ secrets.REDIS_PASSWORD }}
+          REDIS_HOST: ${{ env.REDIS_HOST }}
+          REDIS_PORT: ${{ env.REDIS_PORT }}
+          REDIS_TIME_EXPIRED: ${{ env.REDIS_TIME_EXPIRED }}
+          REDIS_USERNAME: ${{ env.REDIS_USERNAME }}
