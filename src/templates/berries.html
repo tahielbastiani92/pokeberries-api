@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Pokeberries Stats</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 40px;
+            background: #f8f9fa;
+            color: #333;
+        }
+        h1 {
+            text-align: center;
+            color: #222;
+            margin-bottom: 30px;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            padding: 20px 40px;
+        }
+        h2 {
+            color: #444;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 5px;
+        }
+        ul {
+            list-style: none;
+            padding-left: 0;
+            columns: 3;
+        }
+        li {
+            padding: 3px 0;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: center;
+        }
+        th {
+            background-color: #f1f1f1;
+        }
+        .graph-container {
+            text-align: center;
+            margin-top: 40px;
+        }
+        img {
+            max-width: 500px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px #ccc;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Pokeberries Statistics</h1>
+
+        <h2>1. Berry Names ({{ berries.berries_names | length }})</h2>
+        <ul>
+            {% for name in berries.berries_names %}
+                <li>{{ name }}</li>
+            {% endfor %}
+        </ul>
+
+        <h2>2. Growth Time Summary</h2>
+        <table>
+            <tr>
+                <th>Min</th>
+                <th>Median</th>
+                <th>Max</th>
+                <th>Variance</th>
+                <th>Mean</th>
+            </tr>
+            <tr>
+                <td>{{ berries.min_growth_time }}</td>
+                <td>{{ berries.median_growth_time }}</td>
+                <td>{{ berries.max_growth_time }}</td>
+                <td>{{ "%.3f"|format(berries.variance_growth_time) }}</td>
+                <td>{{ "%.3f"|format(berries.mean_growth_time) }}</td>
+            </tr>
+        </table>
+
+        <h2>3. Growth Time Frequency</h2>
+        <table class="freq-table">
+            <tr><th>Growth Time</th><th>Frequency</th></tr>
+            {% for time, count in berries.frequency_growth_time.items() %}
+            <tr>
+                <td>{{ time }}</td>
+                <td>{{ count }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+
+        <div class="graph-container">
+            <h2>4. Histogram: Growth Time Distribution</h2>
+            <img src="data:image/png;base64,{{ histogram }}" alt="Berry Growth Time Histogram">
+        </div>
+
+        <div class="graph-container">
+            <h2>5. Pie: Growth Time Proportion</h2>
+            <img src="data:image/png;base64,{{ pie }}" alt="Berry Growth Time Pie Chart">
+        </div>
+    </div>
+</body>
+</html>
+
