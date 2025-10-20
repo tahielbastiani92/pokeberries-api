@@ -26,11 +26,11 @@ jobs:
       - name: Run pytest
         env:
           POKEAPI_URL: ${{ secrets.POKEAPI_URL }}
-          REDIS_HOST: ${{ env.REDIS_HOST }}
-          REDIS_PORT: ${{ env.REDIS_PORT }}
-          REDIS_USERNAME: ${{ env.REDIS_USERNAME }}
+          REDIS_HOST: ${{ vars.REDIS_HOST }}
+          REDIS_PORT: ${{ vars.REDIS_PORT }}
+          REDIS_USERNAME: ${{ vars.REDIS_USERNAME }}
           REDIS_PASSWORD: ${{ secrets.REDIS_PASSWORD }}
-          REDIS_TIME_EXPIRED: ${{ env.REDIS_TIME_EXPIRED }}
+          REDIS_TIME_EXPIRED: ${{ vars.REDIS_TIME_EXPIRED }}
         run: pytest -v tests/*
 
   deploy:
