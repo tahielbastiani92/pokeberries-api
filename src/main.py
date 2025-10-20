@@ -1,3 +1,4 @@
+import json
 from fastapi import FastAPI, Response
 from src.services.pokeapi import get_all_berries_data
 from src.schemas.berries_stats import BerryStatsResponse
@@ -19,8 +20,7 @@ def all_berry_statstics(response: Response):
     try:
         berries_data = get_all_berries_data()
         stats = calculate_statistics(berries_data)
-        response.headers["Content-Type"] = "application/json"
-        return stats
+        return Response(content=json.dumps(stats, indent=2), media_type="application/json")
     except Exception as e:
         print(f"Error: {e}")
         return {"error": "Unexpected error occurred."}

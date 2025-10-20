@@ -11,9 +11,9 @@ def calculate_statistics(berries_data):
         berry_names = [b['name'] for b in berries_data]
 
         variance_growth = variance(growth_times) if len(growth_times) > 1 else 0
-        freq = Counter(growth_times)
+        freq = Counter(sorted(growth_times))
         return {
-            "berries_names": berry_names,
+            "berries_names": sorted(berry_names),
             "min_growth_time": min(growth_times),
             "median_growth_time": median(growth_times),
             "max_growth_time": max(growth_times),
