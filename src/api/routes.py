@@ -14,11 +14,6 @@ router = APIRouter(prefix="/api/v1")
 template = Jinja2Templates(directory="src/templates")
 
 
-@router.get("/")
-def intial():
-    return {"message": "Working.. Pokeberries statistics is coming.."}
-
-
 @router.get("/allBerryStats", response_model=BerryStatsResponse)
 def all_berry_statstics(response: Response):
     """
