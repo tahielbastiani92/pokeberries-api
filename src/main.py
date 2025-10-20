@@ -1,26 +1,6 @@
-import json
-from fastapi import FastAPI, Response
-from src.services.pokeapi import get_all_berries_data
-from src.schemas.berries_stats import BerryStatsResponse
-from src.utils.statistics import calculate_statistics
+from fastapi import FastAPI
+from src.api.routes import router
+
 
 app = FastAPI(title="Pokeberries API")
-
-
-@app.get("/")
-def intial():
-    return {"message": "Working.. Pokeberries statistics is coming.."}
-
-
-@app.get("/allBerryStats", response_model=BerryStatsResponse)
-def all_berry_statstics(response: Response):
-    """
-    Returns berries' statistics
-    """
-    try:
-        berries_data = get_all_berries_data()
-        stats = calculate_statistics(berries_data)
-        return Response(content=json.dumps(stats, indent=2), media_type="application/json")
-    except Exception as e:
-        print(f"Error: {e}")
-        return {"error": "Unexpected error occurred."}
+app.include_router(router)
