@@ -2,6 +2,7 @@ import io
 import base64
 import json
 from fastapi import APIRouter, Request, Response
+from fastapi.responses import HTMLResponse
 from fastapi.templating import Jinja2Templates
 from matplotlib import pyplot as plt
 from src.services.pokeapi import get_all_berries_data
@@ -32,7 +33,7 @@ def all_berry_statstics(response: Response):
         return {"error": "Unexpected error occurred."}
 
 
-@router.get("/allBerryStats/view")
+@router.get("/allBerryStats/view", response_class=HTMLResponse)
 def all_berry_statstics_view(request: Request):
     """
     Berries' statistics graphics and tables
